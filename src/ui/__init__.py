@@ -1,1 +1,1 @@
-"""Módulo de interfaz gráfica Tkinter."""
+"""Tkinter user interface module."""

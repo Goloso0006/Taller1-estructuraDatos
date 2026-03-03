@@ -1,18 +1,18 @@
-"Ventana principal Tkinter para gestionar estructuras de datos."
+"Main Tkinter window to manage data structures."
 
 import tkinter as tk
 from tkinter import messagebox, ttk
 
-from src.servicios.logistica_service import LogisticaService
+from src.servicios.logistica_service import LogisticsService
 
 
-class LogisticaWindow(tk.Tk):
-    "Interfaz gráfica principal para el taller."
+class LogisticsWindow(tk.Tk):
+    "Main graphical interface for the project." 
 
-    def __init__(self, service: LogisticaService) -> None:
+    def __init__(self, service: LogisticsService) -> None:
         super().__init__()
         self._service = service
-        self.title("Taller 1 - Estructuras de Datos")
+        self.title("Workshop 1 - Data Structures")
         self.geometry("860x600")
         self.resizable(True, True)
 
@@ -23,173 +23,173 @@ class LogisticaWindow(tk.Tk):
         notebook = ttk.Notebook(self)
         notebook.pack(fill="both", expand=True, padx=10, pady=10)
 
-        self._tab_cola = ttk.Frame(notebook)
-        self._tab_pila = ttk.Frame(notebook)
+        self._tab_queue = ttk.Frame(notebook)
+        self._tab_stack = ttk.Frame(notebook)
         self._tab_array = ttk.Frame(notebook)
 
-        notebook.add(self._tab_cola, text="Cola de pedidos")
-        notebook.add(self._tab_pila, text="Pila de camión")
-        notebook.add(self._tab_array, text="Array inventario")
+        notebook.add(self._tab_queue, text="Order Queue")
+        notebook.add(self._tab_stack, text="Truck Stack")
+        notebook.add(self._tab_array, text="Inventory Array")
 
-        self._build_tab_cola()
-        self._build_tab_pila()
+        self._build_tab_queue()
+        self._build_tab_stack()
         self._build_tab_array()
 
-    def _build_tab_cola(self) -> None:
-        form = ttk.LabelFrame(self._tab_cola, text="Registrar pedido")
+    def _build_tab_queue(self) -> None:
+        form = ttk.LabelFrame(self._tab_queue, text="Register Order")
         form.pack(fill="x", padx=10, pady=10)
 
-        ttk.Label(form, text="Código").grid(row=0, column=0, padx=6, pady=6, sticky="w")
-        ttk.Label(form, text="Cliente").grid(row=0, column=2, padx=6, pady=6, sticky="w")
-        ttk.Label(form, text="Categoría").grid(row=0, column=4, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Code").grid(row=0, column=0, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Customer").grid(row=0, column=2, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Category").grid(row=0, column=4, padx=6, pady=6, sticky="w")
 
-        self._pedido_codigo = tk.StringVar()
-        self._pedido_cliente = tk.StringVar()
-        self._pedido_categoria = tk.StringVar()
+        self._order_code = tk.StringVar()
+        self._order_customer = tk.StringVar()
+        self._order_category = tk.StringVar()
 
-        ttk.Entry(form, textvariable=self._pedido_codigo, width=18).grid(row=0, column=1, padx=6, pady=6)
-        ttk.Entry(form, textvariable=self._pedido_cliente, width=20).grid(row=0, column=3, padx=6, pady=6)
-        ttk.Entry(form, textvariable=self._pedido_categoria, width=20).grid(row=0, column=5, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._order_code, width=18).grid(row=0, column=1, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._order_customer, width=20).grid(row=0, column=3, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._order_category, width=20).grid(row=0, column=5, padx=6, pady=6)
 
-        ttk.Button(form, text="Encolar", command=self._on_encolar_pedido).grid(row=0, column=6, padx=6, pady=6)
-        ttk.Button(form, text="Atender", command=self._on_atender_pedido).grid(row=0, column=7, padx=6, pady=6)
+        ttk.Button(form, text="Enqueue", command=self._on_enqueue_order).grid(row=0, column=6, padx=6, pady=6)
+        ttk.Button(form, text="Serve", command=self._on_serve_order).grid(row=0, column=7, padx=6, pady=6)
 
-        self._cola_list = tk.Listbox(self._tab_cola, height=18)
-        self._cola_list.pack(fill="both", expand=True, padx=10, pady=10)
+        self._queue_list = tk.Listbox(self._tab_queue, height=18)
+        self._queue_list.pack(fill="both", expand=True, padx=10, pady=10)
 
-    def _build_tab_pila(self) -> None:
-        form = ttk.LabelFrame(self._tab_pila, text="Gestión de carga")
+    def _build_tab_stack(self) -> None:
+        form = ttk.LabelFrame(self._tab_stack, text="Load Management")
         form.pack(fill="x", padx=10, pady=10)
 
-        ttk.Label(form, text="Código paquete").grid(row=0, column=0, padx=6, pady=6, sticky="w")
-        ttk.Label(form, text="Destino").grid(row=0, column=2, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Package Code").grid(row=0, column=0, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Destination").grid(row=0, column=2, padx=6, pady=6, sticky="w")
 
-        self._paq_codigo = tk.StringVar()
-        self._paq_destino = tk.StringVar()
+        self._package_code = tk.StringVar()
+        self._package_destination = tk.StringVar()
 
-        ttk.Entry(form, textvariable=self._paq_codigo, width=18).grid(row=0, column=1, padx=6, pady=6)
-        ttk.Entry(form, textvariable=self._paq_destino, width=20).grid(row=0, column=3, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._package_code, width=18).grid(row=0, column=1, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._package_destination, width=20).grid(row=0, column=3, padx=6, pady=6)
 
-        ttk.Button(form, text="Apilar", command=self._on_apilar_paquete).grid(row=0, column=4, padx=6, pady=6)
-        ttk.Button(form, text="Desapilar", command=self._on_desapilar_paquete).grid(row=0, column=5, padx=6, pady=6)
+        ttk.Button(form, text="Push", command=self._on_push_package).grid(row=0, column=4, padx=6, pady=6)
+        ttk.Button(form, text="Pop", command=self._on_pop_package).grid(row=0, column=5, padx=6, pady=6)
 
-        self._pila_list = tk.Listbox(self._tab_pila, height=18)
-        self._pila_list.pack(fill="both", expand=True, padx=10, pady=10)
+        self._stack_list = tk.Listbox(self._tab_stack, height=18)
+        self._stack_list.pack(fill="both", expand=True, padx=10, pady=10)
 
     def _build_tab_array(self) -> None:
-        form = ttk.LabelFrame(self._tab_array, text="Asignar inventario")
+        form = ttk.LabelFrame(self._tab_array, text="Assign Inventory")
         form.pack(fill="x", padx=10, pady=10)
 
-        ttk.Label(form, text="Índice (0..n-1)").grid(row=0, column=0, padx=6, pady=6, sticky="w")
-        ttk.Label(form, text="Categoría").grid(row=0, column=2, padx=6, pady=6, sticky="w")
-        ttk.Label(form, text="Producto").grid(row=0, column=4, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Index (0..n-1)").grid(row=0, column=0, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Category").grid(row=0, column=2, padx=6, pady=6, sticky="w")
+        ttk.Label(form, text="Product").grid(row=0, column=4, padx=6, pady=6, sticky="w")
 
-        self._inv_indice = tk.StringVar()
-        self._inv_categoria = tk.StringVar()
-        self._inv_producto = tk.StringVar()
+        self._inventory_index = tk.StringVar()
+        self._inventory_category = tk.StringVar()
+        self._inventory_product = tk.StringVar()
 
-        ttk.Entry(form, textvariable=self._inv_indice, width=15).grid(row=0, column=1, padx=6, pady=6)
-        ttk.Entry(form, textvariable=self._inv_categoria, width=18).grid(row=0, column=3, padx=6, pady=6)
-        ttk.Entry(form, textvariable=self._inv_producto, width=18).grid(row=0, column=5, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._inventory_index, width=15).grid(row=0, column=1, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._inventory_category, width=18).grid(row=0, column=3, padx=6, pady=6)
+        ttk.Entry(form, textvariable=self._inventory_product, width=18).grid(row=0, column=5, padx=6, pady=6)
 
-        ttk.Button(form, text="Asignar", command=self._on_asignar_inventario).grid(row=0, column=6, padx=6, pady=6)
+        ttk.Button(form, text="Assign", command=self._on_assign_inventory).grid(row=0, column=6, padx=6, pady=6)
 
         self._array_list = tk.Listbox(self._tab_array, height=18)
         self._array_list.pack(fill="both", expand=True, padx=10, pady=10)
 
-    def _on_encolar_pedido(self) -> None:
-        codigo = self._pedido_codigo.get().strip()
-        cliente = self._pedido_cliente.get().strip()
-        categoria = self._pedido_categoria.get().strip()
+    def _on_enqueue_order(self) -> None:
+        code = self._order_code.get().strip()
+        customer = self._order_customer.get().strip()
+        category = self._order_category.get().strip()
 
-        if not codigo or not cliente or not categoria:
-            messagebox.showwarning("Datos incompletos", "Completa código, cliente y categoría.")
+        if not code or not customer or not category:
+            messagebox.showwarning("Missing data", "Complete code, customer, and category.")
             return
 
-        self._service.registrar_pedido(codigo=codigo, cliente=cliente, categoria=categoria)
-        self._pedido_codigo.set("")
-        self._pedido_cliente.set("")
-        self._pedido_categoria.set("")
-        self._refresh_cola()
+        self._service.register_order(code=code, customer=customer, category=category)
+        self._order_code.set("")
+        self._order_customer.set("")
+        self._order_category.set("")
+        self._refresh_queue()
 
-    def _on_atender_pedido(self) -> None:
-        pedido = self._service.atender_pedido()
-        if pedido is None:
-            messagebox.showinfo("Cola vacía", "No hay pedidos para atender.")
+    def _on_serve_order(self) -> None:
+        order = self._service.serve_order()
+        if order is None:
+            messagebox.showinfo("Empty queue", "No orders to serve.")
             return
 
-        messagebox.showinfo("Pedido atendido", f"Se atendió: {pedido.codigo} - {pedido.cliente}")
-        self._refresh_cola()
+        messagebox.showinfo("Order served", f"Served: {order.code} - {order.customer}")
+        self._refresh_queue()
 
-    def _on_apilar_paquete(self) -> None:
-        codigo = self._paq_codigo.get().strip()
-        destino = self._paq_destino.get().strip()
+    def _on_push_package(self) -> None:
+        code = self._package_code.get().strip()
+        destination = self._package_destination.get().strip()
 
-        if not codigo or not destino:
-            messagebox.showwarning("Datos incompletos", "Completa código y destino.")
+        if not code or not destination:
+            messagebox.showwarning("Missing data", "Complete code and destination.")
             return
 
-        self._service.cargar_paquete(codigo=codigo, destino=destino)
-        self._paq_codigo.set("")
-        self._paq_destino.set("")
-        self._refresh_pila()
+        self._service.load_package(code=code, destination=destination)
+        self._package_code.set("")
+        self._package_destination.set("")
+        self._refresh_stack()
 
-    def _on_desapilar_paquete(self) -> None:
-        paquete = self._service.descargar_paquete()
-        if paquete is None:
-            messagebox.showinfo("Pila vacía", "No hay paquetes para descargar.")
+    def _on_pop_package(self) -> None:
+        package = self._service.unload_package()
+        if package is None:
+            messagebox.showinfo("Empty stack", "No packages to unload.")
             return
 
-        messagebox.showinfo("Paquete descargado", f"Se descargó: {paquete.codigo} ({paquete.destino})")
-        self._refresh_pila()
+        messagebox.showinfo("Package unloaded", f"Unloaded: {package.code} ({package.destination})")
+        self._refresh_stack()
 
-    def _on_asignar_inventario(self) -> None:
-        indice_txt = self._inv_indice.get().strip()
-        categoria = self._inv_categoria.get().strip()
-        producto = self._inv_producto.get().strip()
+    def _on_assign_inventory(self) -> None:
+        index_text = self._inventory_index.get().strip()
+        category = self._inventory_category.get().strip()
+        product = self._inventory_product.get().strip()
 
-        if not indice_txt or not categoria or not producto:
-            messagebox.showwarning("Datos incompletos", "Completa índice, categoría y producto.")
+        if not index_text or not category or not product:
+            messagebox.showwarning("Missing data", "Complete index, category, and product.")
             return
 
         try:
-            indice = int(indice_txt)
-            self._service.asignar_inventario(indice=indice, categoria=categoria, producto=producto)
+            index = int(index_text)
+            self._service.assign_inventory(index=index, category=category, product=product)
         except ValueError:
-            messagebox.showerror("Índice inválido", "El índice debe ser numérico.")
+            messagebox.showerror("Invalid index", "Index must be numeric.")
             return
         except IndexError as exc:
-            messagebox.showerror("Fuera de rango", str(exc))
+            messagebox.showerror("Out of range", str(exc))
             return
 
-        self._inv_indice.set("")
-        self._inv_categoria.set("")
-        self._inv_producto.set("")
+        self._inventory_index.set("")
+        self._inventory_category.set("")
+        self._inventory_product.set("")
         self._refresh_array()
 
     def _refresh_all(self) -> None:
-        self._refresh_cola()
-        self._refresh_pila()
+        self._refresh_queue()
+        self._refresh_stack()
         self._refresh_array()
 
-    def _refresh_cola(self) -> None:
-        self._cola_list.delete(0, tk.END)
-        for i, pedido in enumerate(self._service.listar_pedidos(), start=1):
-            item = f"{i}. [{pedido.codigo}] {pedido.cliente} - {pedido.categoria}"
-            self._cola_list.insert(tk.END, item)
+    def _refresh_queue(self) -> None:
+        self._queue_list.delete(0, tk.END)
+        for i, order in enumerate(self._service.list_orders(), start=1):
+            item = f"{i}. [{order.code}] {order.customer} - {order.category}"
+            self._queue_list.insert(tk.END, item)
 
-    def _refresh_pila(self) -> None:
-        self._pila_list.delete(0, tk.END)
-        carga = self._service.listar_carga()
-        for pos, paquete in enumerate(reversed(carga), start=1):
-            item = f"{pos}. [{paquete.codigo}] {paquete.destino}"
-            self._pila_list.insert(tk.END, item)
+    def _refresh_stack(self) -> None:
+        self._stack_list.delete(0, tk.END)
+        load = self._service.list_load()
+        for pos, package in enumerate(reversed(load), start=1):
+            item = f"{pos}. [{package.code}] {package.destination}"
+            self._stack_list.insert(tk.END, item)
 
     def _refresh_array(self) -> None:
         self._array_list.delete(0, tk.END)
-        for indice, slot in enumerate(self._service.obtener_inventario()):
+        for index, slot in enumerate(self._service.get_inventory()):
             if slot is None:
-                item = f"{indice}: (vacío)"
+                item = f"{index}: (empty)"
             else:
-                item = f"{indice}: {slot.categoria} -> {slot.producto}"
+                item = f"{index}: {slot.category} -> {slot.product}"
             self._array_list.insert(tk.END, item)

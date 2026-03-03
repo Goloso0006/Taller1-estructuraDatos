@@ -1,6 +1,6 @@
-# Taller 1 - Estructura de Datos
+# Workshop 1 - Data Structures
 
-## Esquema del proyecto
+## Project layout
 
 ```
 Taller1/
@@ -26,24 +26,24 @@ Taller1/
     └── __init__.py
 ```
 
-## Requerimientos implementados
+## Implemented requirements
 
-- **Colas (FIFO):** recepción de pedidos por orden de llegada.
-- **Pilas (LIFO):** gestión de carga/descarga de camión.
-- **Arrays (fijo):** inventario de estanterías por posición física.
-- **Frontend:** interfaz gráfica en Tkinter.
-- **Paradigma:** diseño orientado a objetos (POO).
+- **Queues (FIFO):** receive customer orders in arrival order.
+- **Stacks (LIFO):** manage truck load and unload.
+- **Fixed arrays:** inventory by physical shelf position.
+- **Frontend:** graphical interface in Tkinter.
+- **Paradigm:** object-oriented programming (OOP).
 
-## Ejecución
+## Run
 
-Desde la carpeta raíz del proyecto:
+From the project root folder:
 
 ```
-main.py
+python main.py
 ```
 
-## Arquitectura POO (resumen)
+## OOP architecture (summary)
 
-- `LogisticaService` coordina las operaciones de dominio.
-- `ColaPedidos`, `PilaCamion` e `InventarioArray` encapsulan cada estructura.
-- `LogisticaWindow` implementa la interfaz y delega acciones al servicio.
+- `LogisticsService` coordinates domain operations.
+- `OrderQueue`, `TruckStack`, and `InventoryArray` encapsulate each structure.
+- `LogisticsWindow` implements the UI and delegates actions to the service.

@@ -1,42 +1,42 @@
-"""Array de tamaño fijo para inventario de estanterías."""
+"""Fixed-size array for shelf inventory."""
 
 from dataclasses import dataclass
 from typing import List, Optional
 
 
 @dataclass
-class SlotInventario:
-    """Representa una posición física del inventario."""
+class InventorySlot:
+    """Represents one physical inventory slot."""
 
-    indice: int
-    categoria: str
-    producto: str
+    index: int
+    category: str
+    product: str
 
 
-class InventarioArray:
-    """Arreglo fijo que modela pasillos/estanterías por índice."""
+class InventoryArray:
+    """Fixed array that models shelf positions by index."""
 
-    def __init__(self, capacidad: int) -> None:
-        if capacidad <= 0:
-            raise ValueError("La capacidad debe ser mayor que cero.")
-        self._capacidad = capacidad
-        self._items: List[Optional[SlotInventario]] = [None] * capacidad
+    def __init__(self, capacity: int) -> None:
+        if capacity <= 0:
+            raise ValueError("Capacity must be greater than zero.")
+        self._capacity = capacity
+        self._items: List[Optional[InventorySlot]] = [None] * capacity
 
     @property
-    def capacidad(self) -> int:
-        return self._capacidad
+    def capacity(self) -> int:
+        return self._capacity
 
-    def asignar(self, indice: int, categoria: str, producto: str) -> None:
-        self._validar_indice(indice)
-        self._items[indice] = SlotInventario(indice=indice, categoria=categoria, producto=producto)
+    def assign(self, index: int, category: str, product: str) -> None:
+        self._validate_index(index)
+        self._items[index] = InventorySlot(index=index, category=category, product=product)
 
-    def obtener(self, indice: int) -> Optional[SlotInventario]:
-        self._validar_indice(indice)
-        return self._items[indice]
+    def get(self, index: int) -> Optional[InventorySlot]:
+        self._validate_index(index)
+        return self._items[index]
 
-    def listar(self) -> List[Optional[SlotInventario]]:
+    def list_items(self) -> List[Optional[InventorySlot]]:
         return list(self._items)
 
-    def _validar_indice(self, indice: int) -> None:
-        if indice < 0 or indice >= self._capacidad:
-            raise IndexError(f"Índice fuera de rango: {indice}. Rango válido: 0 a {self._capacidad - 1}.")
+    def _validate_index(self, index: int) -> None:
+        if index < 0 or index >= self._capacity:
+            raise IndexError(f"Index out of range: {index}. Valid range: 0 to {self._capacity - 1}.")

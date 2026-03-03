@@ -1,39 +1,39 @@
-"""Estructura de datos tipo cola para recepción de pedidos."""
+"""Queue data structure for customer orders."""
 
 from dataclasses import dataclass
 from typing import List, Optional
 
 
 @dataclass
-class Pedido:
-    """Representa un pedido ingresado por un cliente."""
+class Order:
+    """Represents one customer order."""
 
-    codigo: str
-    cliente: str
-    categoria: str
+    code: str
+    customer: str
+    category: str
 
 
-class ColaPedidos:
-    """Cola FIFO para pedidos en orden de llegada."""
+class OrderQueue:
+    """FIFO queue for incoming orders."""
 
     def __init__(self) -> None:
-        self._items: List[Pedido] = []
+        self._items: List[Order] = []
 
-    def esta_vacia(self) -> bool:
+    def is_empty(self) -> bool:
         return len(self._items) == 0
 
-    def encolar(self, pedido: Pedido) -> None:
-        self._items.append(pedido)
+    def enqueue(self, order: Order) -> None:
+        self._items.append(order)
 
-    def desencolar(self) -> Optional[Pedido]:
-        if self.esta_vacia():
+    def dequeue(self) -> Optional[Order]:
+        if self.is_empty():
             return None
         return self._items.pop(0)
 
-    def frente(self) -> Optional[Pedido]:
-        if self.esta_vacia():
+    def front(self) -> Optional[Order]:
+        if self.is_empty():
             return None
         return self._items[0]
 
-    def listar(self) -> List[Pedido]:
+    def list_items(self) -> List[Order]:
         return list(self._items)

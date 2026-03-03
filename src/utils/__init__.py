@@ -1,1 +1,1 @@
-"""Utilidades compartidas del proyecto."""
+"""Shared project utilities."""

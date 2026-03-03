@@ -1,10 +1,10 @@
-"""Arranque de la aplicación con interfaz Tkinter."""
+"""Application bootstrap with Tkinter interface."""
 
 import os
 import sys
 from pathlib import Path
 
-from src.servicios.logistica_service import LogisticaService
+from src.servicios.logistica_service import LogisticsService
 
 
 def _configure_tk_environment() -> None:
@@ -29,15 +29,15 @@ def _configure_tk_environment() -> None:
 
 _configure_tk_environment()
 
-from src.ui.app_window import LogisticaWindow
+from src.ui.app_window import LogisticsWindow
 
 
 class AppBootstrap:
-    "Composición principal de la aplicación bajo POO."
+    "Main application composition under OOP."
 
     def __init__(self) -> None:
-        self._service = LogisticaService(capacidad_inventario=10)
-        self._window = LogisticaWindow(service=self._service)
+        self._service = LogisticsService(inventory_capacity=10)
+        self._window = LogisticsWindow(service=self._service)
 
     def run(self) -> None:
         self._window.mainloop()

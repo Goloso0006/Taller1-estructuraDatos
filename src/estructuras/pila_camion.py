@@ -1,38 +1,38 @@
-"""Estructura de datos tipo pila para carga de camión."""
+"""Stack data structure for truck loading."""
 
 from dataclasses import dataclass
 from typing import List, Optional
 
 
 @dataclass
-class Paquete:
-    """Representa un paquete cargado en el camión."""
+class Package:
+    """Represents one loaded package."""
 
-    codigo: str
-    destino: str
+    code: str
+    destination: str
 
 
-class PilaCamion:
-    """Pila LIFO para optimizar carga y descarga de ruta."""
+class TruckStack:
+    """LIFO stack for truck load and unload."""
 
     def __init__(self) -> None:
-        self._items: List[Paquete] = []
+        self._items: List[Package] = []
 
-    def esta_vacia(self) -> bool:
+    def is_empty(self) -> bool:
         return len(self._items) == 0
 
-    def apilar(self, paquete: Paquete) -> None:
-        self._items.append(paquete)
+    def push(self, package: Package) -> None:
+        self._items.append(package)
 
-    def desapilar(self) -> Optional[Paquete]:
-        if self.esta_vacia():
+    def pop(self) -> Optional[Package]:
+        if self.is_empty():
             return None
         return self._items.pop()
 
-    def cima(self) -> Optional[Paquete]:
-        if self.esta_vacia():
+    def peek(self) -> Optional[Package]:
+        if self.is_empty():
             return None
         return self._items[-1]
 
-    def listar(self) -> List[Paquete]:
+    def list_items(self) -> List[Package]:
         return list(self._items)

@@ -1,5 +1,5 @@
-"""Módulo para lógica de negocio y casos de uso."""
+"""Module for business logic and use cases."""
 
-from src.servicios.logistica_service import LogisticaService
+from src.servicios.logistica_service import LogisticsService
 
-__all__ = ["LogisticaService"]
+__all__ = ["LogisticsService"]
