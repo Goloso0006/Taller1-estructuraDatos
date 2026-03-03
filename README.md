@@ -38,8 +38,8 @@ Taller1/
 
 Desde la carpeta raíz del proyecto:
 
-```bash
-python main.py
+```
+main.py
 ```
 
 ## Arquitectura POO (resumen)

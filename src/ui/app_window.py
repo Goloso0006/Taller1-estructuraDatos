@@ -1,4 +1,4 @@
-"""Ventana principal Tkinter para gestionar estructuras de datos."""
+"Ventana principal Tkinter para gestionar estructuras de datos."
 
 import tkinter as tk
 from tkinter import messagebox, ttk
@@ -7,7 +7,7 @@ from src.servicios.logistica_service import LogisticaService
 
 
 class LogisticaWindow(tk.Tk):
-    """Interfaz gráfica principal para el taller."""
+    "Interfaz gráfica principal para el taller."
 
     def __init__(self, service: LogisticaService) -> None:
         super().__init__()

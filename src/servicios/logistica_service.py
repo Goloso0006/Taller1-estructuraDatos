@@ -1,4 +1,4 @@
-"""Servicio de dominio para coordinar pedidos, carga e inventario."""
+"Servicio de dominio para coordinar pedidos, carga e inventario."
 
 from typing import List, Optional
 
@@ -8,7 +8,7 @@ from src.estructuras.pila_camion import Paquete, PilaCamion
 
 
 class LogisticaService:
-    """Fachada de lógica de negocio bajo paradigma POO."""
+    "Fachada de lógica de negocio bajo paradigma POO."
 
     def __init__(self, capacidad_inventario: int = 10) -> None:
         self._cola_pedidos = ColaPedidos()

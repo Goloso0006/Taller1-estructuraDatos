@@ -1,4 +1,4 @@
-"""Punto de entrada del proyecto."""
+"Punto de entrada del proyecto."
 
 from src.app import main
 

@@ -33,7 +33,7 @@ from src.ui.app_window import LogisticaWindow
 
 
 class AppBootstrap:
-    """Composición principal de la aplicación bajo POO."""
+    "Composición principal de la aplicación bajo POO."
 
     def __init__(self) -> None:
         self._service = LogisticaService(capacidad_inventario=10)
